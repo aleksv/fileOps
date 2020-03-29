@@ -8,17 +8,40 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.veljovic.fileSync.main.MainController">
-	<tabs>
-		<Tab text="Search">
-   <content>
-   			<fx:include fx:id="searchControl" source="search/Search.fxml" />
-   </content>
-		</Tab>
-		<Tab text="Sync">
-   <content>
-   			<fx:include fx:id="fileSyncControl" source="fileSync/FileSync.fxml" />
-   </content>
-		</Tab>
-	</tabs>
-</TabPane>
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.veljovic.fileSync.main.MainController">
+	<children>
+      <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="closeMenuItem" mnemonicParsing="false" onAction="#onActionCloseMenuItem" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+		<TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+			<tabs>
+				<Tab text="Search">
+					<content>
+						<fx:include fx:id="searchControl" source="search/Search.fxml" />
+					</content>
+				</Tab>
+				<Tab text="Sync">
+					<content>
+						<fx:include fx:id="fileSyncControl" source="fileSync/FileSync.fxml" />
+					</content>
+				</Tab>
+			</tabs>
+		</TabPane>
+	</children>
+</VBox>

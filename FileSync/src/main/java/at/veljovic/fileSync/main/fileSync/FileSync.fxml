@@ -9,26 +9,26 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<GridPane alignment="TOP_CENTER" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="at.veljovic.fileSync.main.fileSync.FileSyncController">
-  <columnConstraints>
-    <ColumnConstraints hgrow="ALWAYS" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-      <RowConstraints minHeight="10.0" prefHeight="20.0" valignment="BOTTOM" vgrow="ALWAYS" />
-  </rowConstraints>
-   <children>
-      <Button id="startButton" fx:id="startButton" defaultButton="true" disable="true" mnemonicParsing="false" onAction="#start" text="Start" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" />
-      <ProgressBar id="progressBar" fx:id="progressBar" prefWidth="1000.0" progress="0.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" />
-      <HBox alignment="CENTER_RIGHT" />
-      <Button id="destButton" fx:id="destButton" mnemonicParsing="false" onAction="#setFile" prefWidth="1000.0" text="Set destination directory" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
-      <Button id="srcButton" fx:id="srcButton" mnemonicParsing="false" onAction="#setFile" prefWidth="1000.0" text="Set source directory" GridPane.hgrow="ALWAYS" />
-      <Label fx:id="progressLabel" prefWidth="1000.0" textAlignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" />
-   </children>
-   <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-   </padding>
+<GridPane alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.veljovic.fileSync.main.fileSync.FileSyncController">
+	<columnConstraints>
+		<ColumnConstraints hgrow="ALWAYS" />
+	</columnConstraints>
+	<rowConstraints>
+		<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+		<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+		<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+		<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+		<RowConstraints minHeight="10.0" prefHeight="20.0" valignment="BOTTOM" vgrow="ALWAYS" />
+	</rowConstraints>
+	<children>
+		<Button id="startButton" fx:id="startButton" defaultButton="true" disable="true" mnemonicParsing="false" onAction="#start" text="Start" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" />
+		<ProgressBar id="progressBar" fx:id="progressBar" prefWidth="10000.0" progress="0.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" />
+		<HBox alignment="CENTER_RIGHT" />
+		<Button id="destButton" fx:id="destButton" mnemonicParsing="false" onAction="#setFile" prefWidth="10000.0" text="Set destination directory" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
+		<Button id="srcButton" fx:id="srcButton" mnemonicParsing="false" onAction="#setFile" prefWidth="10000.0" text="Set source directory" GridPane.hgrow="ALWAYS" />
+		<Label fx:id="progressLabel" prefWidth="10000.0" textAlignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" />
+	</children>
+	<padding>
+		<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+	</padding>
 </GridPane>
