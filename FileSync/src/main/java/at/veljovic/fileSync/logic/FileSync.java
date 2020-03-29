@@ -42,6 +42,7 @@ public class FileSync implements Runnable {
 			currPos.set(currPos.get() + 1);
 		});
 		listeners.forEach(l -> l.done());
+		listeners.clear();
 	}
 
 	private Map<File, File> determineFilesToCopy() {
