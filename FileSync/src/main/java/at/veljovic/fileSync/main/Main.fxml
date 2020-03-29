@@ -41,6 +41,11 @@
 						<fx:include fx:id="fileSyncControl" source="fileSync/FileSync.fxml" />
 					</content>
 				</Tab>
+            <Tab text="Observer">
+              <content>
+                <fx:include fx:id="dirObserverControl" source="dirObserver/DirObserver.fxml" />
+              </content>
+            </Tab>
 			</tabs>
 		</TabPane>
 	</children>
