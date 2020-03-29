@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="destButton" maxHeight="200.0" maxWidth="508.0" minHeight="158.0" minWidth="200.0" prefHeight="158.0" prefWidth="508.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.veljovic.fileSync.main.Controller">
-   <children>
-      <Label layoutX="29.0" layoutY="24.0" text="Source" />
-      <Button id="srcButton" fx:id="srcButton" layoutX="99.0" layoutY="20.0" mnemonicParsing="false" onAction="#setFile" text="Set..." />
-      <Label layoutX="29.0" layoutY="58.0" text="Destination" />
-      <Button id="destButton" fx:id="destButton" layoutX="99.0" layoutY="54.0" mnemonicParsing="false" onAction="#setFile" text="Set..." />
-      <Label id="srcLabel" fx:id="srcLabel" layoutX="157.0" layoutY="24.0" prefHeight="17.0" prefWidth="345.0" text="" />
-      <Label id="destLabel" fx:id="destLabel" layoutX="157.0" layoutY="58.0" prefHeight="17.0" prefWidth="345.0" text="" />
-      <Button id="startButton" fx:id="startButton" disable="true" layoutX="29.0" layoutY="88.0" mnemonicParsing="false" onAction="#start" prefHeight="25.0" prefWidth="111.0" text="Start" />
-      <ProgressBar id="progressBar" fx:id="progressBar" layoutX="29.0" layoutY="129.0" prefHeight="18.0" prefWidth="471.0" progress="0.0" />
-      <Label id="progressLabel" fx:id="progressLabel" layoutX="157.0" layoutY="92.0" prefHeight="17.0" prefWidth="345.0" />
-   </children>
-</AnchorPane>
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+	prefWidth="600.0" tabClosingPolicy="UNAVAILABLE"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="at.veljovic.fileSync.main.MainController">
+	<tabs>
+		<Tab text="Search">
+			<fx:include fx:id="searchControl"
+				source="search/Search.fxml" />
+		</Tab>
+		<Tab text="Sync">
+			<fx:include fx:id="fileSyncControl"
+				source="fileSync/FileSync.fxml" />
+		</Tab>
+	</tabs>
+</TabPane>

@@ -1,10 +1,10 @@
-package at.veljovic.fileSync.main;
+package at.veljovic.fileSync.main.fileSync;
 
 import java.io.File;
 import java.util.Optional;
 
-import at.veljovic.fileSync.model.FileSync;
-import at.veljovic.fileSync.model.FileSync.ProgressListener;
+import at.veljovic.fileSync.logic.FileSync;
+import at.veljovic.fileSync.logic.FileSync.ProgressListener;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +18,7 @@ import javafx.stage.DirectoryChooser;
  * @author av
  *
  */
-public class Controller implements ProgressListener {
+public class FileSyncController implements ProgressListener {
 	@FXML
 	private Button srcButton;
 	@FXML
@@ -37,7 +37,7 @@ public class Controller implements ProgressListener {
 	private Optional<File> srcDir = Optional.empty();
 	private Optional<File> destDir = Optional.empty();
 
-	public Controller() {
+	public FileSyncController() {
 	}
 
 	public void initialize() {

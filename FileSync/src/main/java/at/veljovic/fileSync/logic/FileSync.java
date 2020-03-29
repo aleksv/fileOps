@@ -1,4 +1,4 @@
-package at.veljovic.fileSync.model;
+package at.veljovic.fileSync.logic;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.commons.io.FileUtils;
@@ -83,5 +84,16 @@ public class FileSync implements Runnable {
 		void getProgress(double d, File file);
 
 		void done();
+	}
+
+	public static void main(String[] args) {
+		AtomicLong count = new AtomicLong(0);
+		FileUtils.iterateFiles(new File("C:\\"), null, true).forEachRemaining(file -> {
+			long curr = count.getAndIncrement();
+			if (curr % 1000 == 0) {
+				System.out.println(curr);
+			}
+		});
+		System.out.println(count);
 	}
 }
