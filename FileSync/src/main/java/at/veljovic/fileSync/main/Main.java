@@ -22,6 +22,13 @@ public class Main extends Application {
 		stage.setScene(new Scene(root));
 		stage.setTitle("FileOps");
 		stage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
+		stage.setMaxWidth(900);
+		stage.setMinWidth(500);
+		stage.setWidth(500);
+		stage.setMaxHeight(900);
+		stage.setMinHeight(300);
+		stage.setHeight(500);
+
 		stage.show();
 	}
 

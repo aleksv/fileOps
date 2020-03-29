@@ -8,19 +8,17 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-	prefWidth="600.0" tabClosingPolicy="UNAVAILABLE"
-	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="at.veljovic.fileSync.main.MainController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.veljovic.fileSync.main.MainController">
 	<tabs>
 		<Tab text="Search">
-			<fx:include fx:id="searchControl"
-				source="search/Search.fxml" />
+   <content>
+   			<fx:include fx:id="searchControl" source="search/Search.fxml" />
+   </content>
 		</Tab>
 		<Tab text="Sync">
-			<fx:include fx:id="fileSyncControl"
-				source="fileSync/FileSync.fxml" />
+   <content>
+   			<fx:include fx:id="fileSyncControl" source="fileSync/FileSync.fxml" />
+   </content>
 		</Tab>
 	</tabs>
 </TabPane>

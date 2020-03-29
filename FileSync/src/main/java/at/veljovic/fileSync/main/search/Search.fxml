@@ -6,16 +6,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="370.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.veljovic.fileSync.main.search.SearchController">
+<GridPane hgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.veljovic.fileSync.main.search.SearchController">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+    <ColumnConstraints fillWidth="false" hgrow="ALWAYS" minWidth="10.0" />
+      <ColumnConstraints fillWidth="false" hgrow="ALWAYS" minWidth="10.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints minHeight="20.0" prefHeight="20.0" vgrow="NEVER" />
     <RowConstraints minHeight="20.0" prefHeight="20.0" vgrow="NEVER" />
-      <RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="ALWAYS" />
+      <RowConstraints minHeight="20.0" vgrow="ALWAYS" />
       <RowConstraints minHeight="20.0" prefHeight="20.0" vgrow="NEVER" />
     <RowConstraints minHeight="20.0" prefHeight="20.0" vgrow="NEVER" />
   </rowConstraints>
@@ -24,19 +24,19 @@
    </padding>
    <children>
       <TextField fx:id="fileTextfield" promptText="File name" />
-      <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2">
+      <HBox spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2">
          <children>
             <CheckBox fx:id="regexCheckbox" mnemonicParsing="false" onAction="#onActionRegexCheckbox" text="Regex" />
             <CheckBox fx:id="caseSensitiveCheckbox" mnemonicParsing="false" text="Case sensitive" />
          </children>
       </HBox>
-      <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+      <HBox alignment="BOTTOM_RIGHT" spacing="10.0" GridPane.columnSpan="3" GridPane.rowIndex="4">
          <children>
             <ProgressIndicator fx:id="progressIndicator" visible="false" />
-            <Button fx:id="searchButton" mnemonicParsing="false" onAction="#onActionSearchButton" text="Search" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+            <Button fx:id="searchButton" defaultButton="true" mnemonicParsing="false" onAction="#onActionSearchButton" text="Search" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
             <Button fx:id="cancelButton" cancelButton="true" disable="true" mnemonicParsing="false" onAction="#onActionCancelButton" text="Cancel" />
          </children>
       </HBox>
-      <ListView fx:id="resultListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+      <ListView fx:id="resultListView" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
    </children>
 </GridPane>

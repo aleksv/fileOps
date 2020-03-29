@@ -1,6 +1,8 @@
 package at.veljovic.fileSync.main.fileSync;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import at.veljovic.fileSync.logic.FileSync;
@@ -8,6 +10,7 @@ import at.veljovic.fileSync.logic.FileSync.ProgressListener;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -22,11 +25,7 @@ public class FileSyncController implements ProgressListener {
 	@FXML
 	private Button srcButton;
 	@FXML
-	private Label srcLabel;
-	@FXML
 	private Button destButton;
-	@FXML
-	private Label destLabel;
 	@FXML
 	private ProgressBar progressBar;
 	@FXML
@@ -37,10 +36,14 @@ public class FileSyncController implements ProgressListener {
 	private Optional<File> srcDir = Optional.empty();
 	private Optional<File> destDir = Optional.empty();
 
+	private final Map<Node, String> defaultTexts = new HashMap<>();
+
 	public FileSyncController() {
 	}
 
 	public void initialize() {
+		defaultTexts.put(srcButton, srcButton.getText());
+		defaultTexts.put(destButton, destButton.getText());
 	}
 
 	@FXML
@@ -48,17 +51,16 @@ public class FileSyncController implements ProgressListener {
 		Button targetButton = (Button) e.getSource();
 		DirectoryChooser directoryChooser = new DirectoryChooser();
 		Optional<File> dir = Optional.ofNullable(directoryChooser.showDialog(targetButton.getScene().getWindow()));
-		Label label;
+		targetButton.setText(dir.map(d -> d.getAbsolutePath()).orElse(defaultTexts.get(targetButton)));
+
 		if (targetButton == srcButton) {
-			label = srcLabel;
 			srcDir = dir;
 		} else if (targetButton == destButton) {
-			label = destLabel;
 			destDir = dir;
 		} else {
 			throw new IllegalArgumentException();
 		}
-		label.setText(dir.map(d -> d.getAbsolutePath()).orElse(""));
+
 		updateControlStates();
 	}
 
