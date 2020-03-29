@@ -47,7 +47,7 @@ public class FileSync implements Runnable {
 		final Map<File, File> filesToCopy = new HashMap<>();
 		FileUtils.iterateFiles(sourceDir, null, true).forEachRemaining(srcFile -> {
 			File destFile = new File(
-					srcFile.getAbsolutePath().replace(sourceDir.getAbsolutePath(), destDir.getAbsolutePath()));
+					srcFile.getAbsolutePath().replace(sourceDir.getAbsolutePath(), destDir.getAbsolutePath() + "\\"));
 
 			if (isFileChanged(srcFile, destFile)) {
 				filesToCopy.put(srcFile, destFile);

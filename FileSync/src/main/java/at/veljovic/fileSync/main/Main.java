@@ -8,6 +8,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author av
+ *
+ */
 public class Main extends Application {
 
 	@Override
@@ -16,7 +21,6 @@ public class Main extends Application {
 		stage.setScene(new Scene(root));
 		stage.setTitle("FileSync");
 		stage.show();
-
 	}
 
 	public static void main(String[] args) {
