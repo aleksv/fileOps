@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.apache.commons.io.FileUtils;
@@ -21,6 +21,7 @@ public class FileSync implements Runnable {
 	private final File sourceDir;
 	private final File destDir;
 	private final List<ProgressListener> listeners = new ArrayList<>();
+	private final AtomicBoolean isStopped = new AtomicBoolean(false);
 
 	public FileSync(File sourceDir, File destDir) {
 		this.sourceDir = sourceDir;
@@ -33,14 +34,21 @@ public class FileSync implements Runnable {
 
 	@Override
 	public void run() {
-		Map<File, File> filesToCopy = determineFilesToCopy();
-		double size = filesToCopy.size();
-		AtomicReference<Double> currPos = new AtomicReference<>(0d);
-		filesToCopy.forEach((srcFile, destFile) -> {
-			listeners.forEach(l -> l.getProgress(currPos.get() / size, srcFile));
-			copy(srcFile, destFile);
-			currPos.set(currPos.get() + 1);
-		});
+		try {
+			Map<File, File> filesToCopy = determineFilesToCopy();
+			double size = filesToCopy.size();
+			AtomicReference<Double> currPos = new AtomicReference<>(0d);
+			filesToCopy.forEach((srcFile, destFile) -> {
+				listeners.forEach(l -> l.getProgress(currPos.get() / size, srcFile));
+				copy(srcFile, destFile);
+				currPos.set(currPos.get() + 1);
+				if (isStopped.get()) {
+					throw new StoppedException();
+				}
+			});
+		} catch (StoppedException expected) {
+
+		}
 		listeners.forEach(l -> l.done());
 		listeners.clear();
 	}
@@ -50,12 +58,11 @@ public class FileSync implements Runnable {
 		FileUtils.iterateFiles(sourceDir, null, true).forEachRemaining(srcFile -> {
 			File destFile = new File(
 					srcFile.getAbsolutePath().replace(sourceDir.getAbsolutePath(), destDir.getAbsolutePath() + "\\"));
-
-			if (isFileChanged(srcFile, destFile)) {
+			if (isStopped.get()) {
+				throw new StoppedException();
+			} else if (isFileChanged(srcFile, destFile)) {
 				filesToCopy.put(srcFile, destFile);
-				System.out.println("added " + srcFile.getAbsolutePath());
-			} else {
-				System.out.println("skip " + srcFile.getAbsolutePath());
+
 			}
 		});
 		return filesToCopy;
@@ -75,6 +82,10 @@ public class FileSync implements Runnable {
 				|| destFile.lastModified() != srcFile.lastModified();
 	}
 
+	public void stop() {
+		isStopped.set(true);
+	}
+
 	/**
 	 * 
 	 * @author av
@@ -87,14 +98,8 @@ public class FileSync implements Runnable {
 		void done();
 	}
 
-	public static void main(String[] args) {
-		AtomicLong count = new AtomicLong(0);
-		FileUtils.iterateFiles(new File("C:\\"), null, true).forEachRemaining(file -> {
-			long curr = count.getAndIncrement();
-			if (curr % 1000 == 0) {
-				System.out.println(curr);
-			}
-		});
-		System.out.println(count);
+	private class StoppedException extends RuntimeException {
+		private static final long serialVersionUID = 1L;
+
 	}
 }

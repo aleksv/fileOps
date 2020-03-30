@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import at.veljovic.fileSync.logic.FileSearch;
 import at.veljovic.fileSync.logic.FileSearch.FileSearchListener;
+import at.veljovic.fileSync.main.Main.ApplicationListener;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,7 +26,7 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.MouseEvent;
 
-public class SearchController implements FileSearchListener {
+public class SearchController implements FileSearchListener, ApplicationListener {
 
 	@FXML
 	private TextField fileTextfield;
@@ -146,5 +147,10 @@ public class SearchController implements FileSearchListener {
 		Platform.runLater(() -> {
 
 		});
+	}
+
+	@Override
+	public void onShutdown() {
+		onActionCancelButton();
 	}
 }

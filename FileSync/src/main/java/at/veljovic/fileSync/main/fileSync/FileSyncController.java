@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import at.veljovic.fileSync.logic.FileSync;
 import at.veljovic.fileSync.logic.FileSync.ProgressListener;
+import at.veljovic.fileSync.main.Main.ApplicationListener;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +22,7 @@ import javafx.stage.DirectoryChooser;
  * @author av
  *
  */
-public class FileSyncController implements ProgressListener {
+public class FileSyncController implements ProgressListener, ApplicationListener {
 	@FXML
 	private Button srcButton;
 	@FXML
@@ -31,12 +32,15 @@ public class FileSyncController implements ProgressListener {
 	@FXML
 	private Button startButton;
 	@FXML
+	private Button cancelButton;
+	@FXML
 	private Label progressLabel;
 
 	private Optional<File> srcDir = Optional.empty();
 	private Optional<File> destDir = Optional.empty();
 
 	private final Map<Node, String> defaultTexts = new HashMap<>();
+	private Optional<FileSync> fileSync = Optional.empty();
 
 	public FileSyncController() {
 	}
@@ -69,14 +73,15 @@ public class FileSyncController implements ProgressListener {
 	}
 
 	@FXML
-	public void start() {
-		FileSync fileSync = new FileSync(srcDir.get(), destDir.get());
-		fileSync.addProgressListener(this);
-		new Thread(fileSync).start();
+	public void onActionStartButton() {
+		fileSync = Optional.of(new FileSync(srcDir.get(), destDir.get()));
+		fileSync.get().addProgressListener(this);
+		new Thread(fileSync.get()).start();
 	}
 
 	@Override
 	public void getProgress(double d, File file) {
+		cancelButton.setDisable(false);
 		Platform.runLater(() -> {
 			progressBar.setProgress(d);
 			progressLabel.setText(file.getName());
@@ -89,5 +94,15 @@ public class FileSyncController implements ProgressListener {
 			progressBar.setProgress(0);
 			progressLabel.setText("");
 		});
+		cancelButton.setDisable(true);
+	}
+
+	public void onActionCancelButton() {
+		fileSync.ifPresent(f -> f.stop());
+	}
+
+	@Override
+	public void onShutdown() {
+		fileSync.ifPresent(f -> f.stop());
 	}
 }

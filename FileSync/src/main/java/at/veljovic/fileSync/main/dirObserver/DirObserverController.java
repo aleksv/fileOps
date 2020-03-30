@@ -2,12 +2,14 @@ package at.veljovic.fileSync.main.dirObserver;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 import at.veljovic.fileSync.logic.DirectoryWatcher;
 import at.veljovic.fileSync.logic.DirectoryWatcher.FileWatcherListener;
+import at.veljovic.fileSync.main.Main.ApplicationListener;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +21,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressIndicator;
 import javafx.stage.DirectoryChooser;
 
-public class DirObserverController implements FileWatcherListener {
+public class DirObserverController implements FileWatcherListener, ApplicationListener {
 	@FXML
 	private Button directoryButton;
 	@FXML
@@ -29,9 +31,9 @@ public class DirObserverController implements FileWatcherListener {
 	@FXML
 	private ProgressIndicator progressIndicator;
 	@FXML
-	private ListView<File> resultListView;
-	private final ObservableList<File> resultList = FXCollections.observableArrayList();
-	private DirectoryWatcher directoryWatcher;
+	private ListView<String> resultListView;
+	private final ObservableList<String> resultList = FXCollections.observableArrayList();
+	private Optional<DirectoryWatcher> directoryWatcher = Optional.empty();
 
 	private Optional<File> dir = Optional.empty();
 
@@ -55,16 +57,16 @@ public class DirObserverController implements FileWatcherListener {
 
 	public void onActionStartButton() throws IOException, InterruptedException {
 		resultList.clear();
-		directoryWatcher = new DirectoryWatcher(dir.get());
-		directoryWatcher.addListener(this);
-		new Thread(directoryWatcher).start();
+		directoryWatcher = Optional.of(new DirectoryWatcher(dir.get()));
+		directoryWatcher.get().addListener(this);
+		new Thread(directoryWatcher.get()).start();
 		startButton.setDisable(true);
 		stopButton.setDisable(false);
 		progressIndicator.setVisible(true);
 	}
 
 	public void onActionStopButton() throws Exception {
-		directoryWatcher.stop();
+		directoryWatcher.get().stop();
 		startButton.setDisable(false);
 		stopButton.setDisable(true);
 		progressIndicator.setVisible(false);
@@ -72,23 +74,32 @@ public class DirObserverController implements FileWatcherListener {
 
 	@Override
 	public void onCreate(File file) {
+		addFileDetails(FileOp.C, file);
+	}
+
+	private void addFileDetails(FileOp fo, File file) {
+		File t = new File(file.getAbsolutePath());
 		Platform.runLater(() -> {
-			resultList.add(file);
+			resultList.add("[" + fo + "] [" + new Date() + "] " + t.getAbsolutePath());
 		});
 	}
 
 	@Override
 	public void onDelete(File file) {
-		Platform.runLater(() -> {
-			resultList.add(file);
-		});
+		addFileDetails(FileOp.D, file);
 	}
 
 	@Override
 	public void onModify(File file) {
-		Platform.runLater(() -> {
-			resultList.add(file);
-		});
+		addFileDetails(FileOp.M, file);
 	}
 
+	private enum FileOp {
+		C, D, M;
+	}
+
+	@Override
+	public void onShutdown() {
+		directoryWatcher.ifPresent(d -> d.stop());
+	}
 }

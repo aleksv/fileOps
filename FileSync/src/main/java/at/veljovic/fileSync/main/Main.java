@@ -16,9 +16,12 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+	private MainController mainController;
+
 	@Override
 	public void start(Stage stage) throws IOException {
-		Parent root = new FXMLLoader(getClass().getResource("main.fxml")).load();
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
+		Parent root = fxmlLoader.load();
 		stage.setScene(new Scene(root));
 		stage.setTitle("FileOps");
 		stage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
@@ -27,9 +30,21 @@ public class Main extends Application {
 		stage.setHeight(500);
 		stage.setMinHeight(500);
 		stage.show();
+
+		mainController = fxmlLoader.getController();
+
 	}
 
 	public static void main(String[] args) {
 		launch(args);
+	}
+
+	@Override
+	public void stop() throws Exception {
+		mainController.onShutdown();
+	}
+
+	public interface ApplicationListener {
+		void onShutdown();
 	}
 }
