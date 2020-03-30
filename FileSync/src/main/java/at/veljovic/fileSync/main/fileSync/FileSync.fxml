@@ -18,7 +18,7 @@
 		<RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
 		<RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
 		<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
-		<RowConstraints minHeight="20.0" prefHeight="30.0" vgrow="NEVER" />
+		<RowConstraints minHeight="20.0" prefHeight="30.0" valignment="BOTTOM" vgrow="NEVER" />
 		<RowConstraints minHeight="30.0" prefHeight="30.0" valignment="BOTTOM" vgrow="ALWAYS" />
 	</rowConstraints>
 	<children>
@@ -29,7 +29,7 @@
             <Button fx:id="cancelButton" cancelButton="true" disable="true" mnemonicParsing="false" onAction="#onActionCancelButton" text="Cancel" />
 			</children>
 		</HBox>
-		<ProgressBar id="progressBar" fx:id="progressBar" prefWidth="10000.0" progress="0.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" />
+		<ProgressBar id="progressBar" fx:id="progressBar" prefWidth="10000.0" progress="0.0" visible="false" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" />
 		<HBox alignment="CENTER_RIGHT" GridPane.rowIndex="1" />
 		<Button id="destButton" fx:id="destButton" mnemonicParsing="false" onAction="#setFile" prefWidth="10000.0" text="Set destination directory" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" />
 		<Button id="srcButton" fx:id="srcButton" mnemonicParsing="false" onAction="#setFile" prefWidth="10000.0" text="Set source directory" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />

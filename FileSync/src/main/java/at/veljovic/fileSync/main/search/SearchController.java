@@ -66,7 +66,7 @@ public class SearchController implements FileSearchListener, ApplicationListener
 		});
 		searchables.forEach(search -> {
 			search.addListener(this);
-			new Thread(search).start();
+			new Thread(search, getClass().getName()).start();
 		});
 	}
 

@@ -14,6 +14,7 @@ import java.nio.file.WatchService;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class DirectoryWatcher implements Runnable {
@@ -60,29 +61,27 @@ public class DirectoryWatcher implements Runnable {
 				}
 			});
 
-			WatchKey key;
-			while ((key = watchService.take()) != null) {
-				for (WatchEvent<?> event : key.pollEvents()) {
-					File file = ((Path) event.context()).toFile();
+			while (!isStopped.get()) {
+				Optional<WatchKey> key = Optional.ofNullable(watchService.poll());
+				if (key.isPresent()) {
+					for (WatchEvent<?> event : key.map(k -> k.pollEvents()).get()) {
+						File file = ((Path) event.context()).toFile();
+						listeners.forEach(l -> {
+							if (event.kind() == StandardWatchEventKinds.ENTRY_CREATE) {
+								l.onCreate(file);
+							} else if (event.kind() == StandardWatchEventKinds.ENTRY_DELETE) {
+								l.onDelete(file);
+							} else if (event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
+								l.onModify(file);
+							}
+						});
 
-					listeners.forEach(l -> {
-						if (event.kind() == StandardWatchEventKinds.ENTRY_CREATE) {
-							l.onCreate(file);
-						} else if (event.kind() == StandardWatchEventKinds.ENTRY_DELETE) {
-							l.onDelete(file);
-						} else if (event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
-							l.onModify(file);
-						}
-					});
-
-				}
-				key.reset();
-
-				if (isStopped.get()) {
-					break;
+					}
+					key.ifPresent(k -> k.reset());
 				}
 			}
 
+			watchService.close();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

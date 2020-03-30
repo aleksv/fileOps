@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Tab?>
@@ -11,6 +12,9 @@
 <VBox xmlns="http://javafx.com/javafx/8"
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="at.veljovic.fileSync.main.MainController">
+	<stylesheets>
+		<URL value="@style.css" />
+	</stylesheets>
 	<children>
 		<MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
 			<menus>
@@ -36,8 +40,7 @@
 			<tabs>
 				<Tab text="Search">
 					<content>
-						<fx:include fx:id="search"
-							source="search/Search.fxml" />
+						<fx:include fx:id="search" source="search/Search.fxml" />
 					</content>
 				</Tab>
 				<Tab text="Sync">

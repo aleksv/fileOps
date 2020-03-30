@@ -76,13 +76,16 @@ public class FileSyncController implements ProgressListener, ApplicationListener
 	public void onActionStartButton() {
 		fileSync = Optional.of(new FileSync(srcDir.get(), destDir.get()));
 		fileSync.get().addProgressListener(this);
-		new Thread(fileSync.get()).start();
+
+		cancelButton.setDisable(false);
+		progressBar.setVisible(true);
+		new Thread(fileSync.get(), getClass().getName()).start();
 	}
 
 	@Override
 	public void getProgress(double d, File file) {
-		cancelButton.setDisable(false);
 		Platform.runLater(() -> {
+
 			progressBar.setProgress(d);
 			progressLabel.setText(file.getName());
 		});
@@ -93,8 +96,9 @@ public class FileSyncController implements ProgressListener, ApplicationListener
 		Platform.runLater(() -> {
 			progressBar.setProgress(0);
 			progressLabel.setText("");
+			cancelButton.setDisable(true);
+			progressBar.setVisible(false);
 		});
-		cancelButton.setDisable(true);
 	}
 
 	public void onActionCancelButton() {

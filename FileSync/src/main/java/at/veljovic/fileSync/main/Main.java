@@ -22,7 +22,9 @@ public class Main extends Application {
 	public void start(Stage stage) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
 		Parent root = fxmlLoader.load();
-		stage.setScene(new Scene(root));
+		Scene scene = new Scene(root);
+		setUserAgentStylesheet(STYLESHEET_MODENA);
+		stage.setScene(scene);
 		stage.setTitle("FileOps");
 		stage.getIcons().add(new Image(getClass().getResourceAsStream("icon.png")));
 		stage.setWidth(500);

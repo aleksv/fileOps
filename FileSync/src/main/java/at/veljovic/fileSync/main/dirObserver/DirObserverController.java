@@ -59,7 +59,7 @@ public class DirObserverController implements FileWatcherListener, ApplicationLi
 		resultList.clear();
 		directoryWatcher = Optional.of(new DirectoryWatcher(dir.get()));
 		directoryWatcher.get().addListener(this);
-		new Thread(directoryWatcher.get()).start();
+		new Thread(directoryWatcher.get(), getClass().getName()).start();
 		startButton.setDisable(true);
 		stopButton.setDisable(false);
 		progressIndicator.setVisible(true);
