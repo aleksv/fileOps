@@ -11,7 +11,7 @@
 
 <VBox xmlns="http://javafx.com/javafx/8"
 	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="at.veljovic.fileSync.main.MainController">
+	fx:controller="at.veljovic.fileOps.main.MainController">
 	<stylesheets>
 		<URL value="@style.css" />
 	</stylesheets>

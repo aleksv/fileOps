@@ -1,4 +1,4 @@
-package at.veljovic.fileSync.main.search;
+package at.veljovic.fileOps.main.search;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -8,9 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import at.veljovic.fileSync.logic.FileSearch;
-import at.veljovic.fileSync.logic.FileSearch.FileSearchListener;
-import at.veljovic.fileSync.main.Main.ApplicationListener;
+import at.veljovic.fileOps.logic.FileSearch;
+import at.veljovic.fileOps.logic.FileSearch.FileSearchListener;
+import at.veljovic.fileOps.main.Main.ApplicationListener;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

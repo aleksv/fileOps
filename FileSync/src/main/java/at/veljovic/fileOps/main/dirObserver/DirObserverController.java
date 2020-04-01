@@ -1,4 +1,4 @@
-package at.veljovic.fileSync.main.dirObserver;
+package at.veljovic.fileOps.main.dirObserver;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import at.veljovic.fileSync.logic.DirectoryWatcher;
-import at.veljovic.fileSync.logic.DirectoryWatcher.FileWatcherListener;
-import at.veljovic.fileSync.main.Main.ApplicationListener;
+import at.veljovic.fileOps.logic.DirectoryWatcher;
+import at.veljovic.fileOps.logic.DirectoryWatcher.FileWatcherListener;
+import at.veljovic.fileOps.main.Main.ApplicationListener;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

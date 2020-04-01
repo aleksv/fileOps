@@ -1,6 +1,6 @@
-package at.veljovic.fileSync;
+package at.veljovic.fileOps;
 
-import at.veljovic.fileSync.main.Main;
+import at.veljovic.fileOps.main.Main;
 
 /**
  * 

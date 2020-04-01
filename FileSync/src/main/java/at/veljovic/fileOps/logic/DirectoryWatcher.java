@@ -1,4 +1,4 @@
-package at.veljovic.fileSync.logic;
+package at.veljovic.fileOps.logic;
 
 import java.io.File;
 import java.io.IOException;

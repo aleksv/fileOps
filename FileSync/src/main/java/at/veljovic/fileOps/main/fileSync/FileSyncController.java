@@ -1,13 +1,13 @@
-package at.veljovic.fileSync.main.fileSync;
+package at.veljovic.fileOps.main.fileSync;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import at.veljovic.fileSync.logic.FileSync;
-import at.veljovic.fileSync.logic.FileSync.ProgressListener;
-import at.veljovic.fileSync.main.Main.ApplicationListener;
+import at.veljovic.fileOps.logic.FileSync;
+import at.veljovic.fileOps.logic.FileSync.ProgressListener;
+import at.veljovic.fileOps.main.Main.ApplicationListener;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

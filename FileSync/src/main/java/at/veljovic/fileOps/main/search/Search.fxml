@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<GridPane alignment="TOP_CENTER" hgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.veljovic.fileSync.main.search.SearchController">
+<GridPane alignment="TOP_CENTER" hgap="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.veljovic.fileOps.main.search.SearchController">
 	<columnConstraints>
 		<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
 		<ColumnConstraints fillWidth="false" hgrow="SOMETIMES" minWidth="100.0" />

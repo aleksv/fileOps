@@ -1,12 +1,12 @@
-package at.veljovic.fileSync.main;
+package at.veljovic.fileOps.main;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import at.veljovic.fileSync.main.Main.ApplicationListener;
-import at.veljovic.fileSync.main.dirObserver.DirObserverController;
-import at.veljovic.fileSync.main.fileSync.FileSyncController;
-import at.veljovic.fileSync.main.search.SearchController;
+import at.veljovic.fileOps.main.Main.ApplicationListener;
+import at.veljovic.fileOps.main.dirObserver.DirObserverController;
+import at.veljovic.fileOps.main.fileSync.FileSyncController;
+import at.veljovic.fileOps.main.search.SearchController;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
