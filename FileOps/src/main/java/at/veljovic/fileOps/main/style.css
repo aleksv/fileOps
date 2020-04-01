@@ -1,0 +1,7 @@
+.root {
+	-fx-base: #B0E8E3;
+	-fx-background: white;
+	-fx-dark-text-color: #000;
+    -fx-mid-text-color: #333;
+    -fx-light-text-color: #999;
+}
