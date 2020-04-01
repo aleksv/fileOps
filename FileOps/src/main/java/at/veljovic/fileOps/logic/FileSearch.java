@@ -50,6 +50,7 @@ public class FileSearch implements Runnable {
 
 	@Override
 	public void run() {
+		System.out.println("file search start");
 		listeners.forEach(l -> l.start());
 
 		try {
@@ -87,6 +88,7 @@ public class FileSearch implements Runnable {
 
 		listeners.forEach(l -> l.done());
 		listeners.clear();
+		System.out.println("file search done");
 	}
 
 	private boolean isFilenameMatch(File file) {

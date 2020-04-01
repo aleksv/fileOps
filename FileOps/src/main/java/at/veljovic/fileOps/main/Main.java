@@ -48,5 +48,7 @@ public class Main extends Application {
 
 	public interface ApplicationListener {
 		void onShutdown();
+
+		void initialize();
 	}
 }

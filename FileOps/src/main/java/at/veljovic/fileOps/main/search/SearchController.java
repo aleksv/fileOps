@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import at.veljovic.fileOps.logic.FileSearch;
 import at.veljovic.fileOps.logic.FileSearch.FileSearchListener;
@@ -47,8 +48,11 @@ public class SearchController implements FileSearchListener, ApplicationListener
 	private ContextMenu resultFileContextMenu;
 
 	private List<FileSearch> searchables = new ArrayList<>();
+	private AtomicInteger searchablesDone = new AtomicInteger(0);
 
-	public SearchController() {
+	@Override
+	public void initialize() {
+
 	}
 
 	public void onActionRegexCheckbox() {
@@ -60,6 +64,7 @@ public class SearchController implements FileSearchListener, ApplicationListener
 		String filename = Optional.ofNullable(fileTextfield.getText()).orElse("");
 
 		searchables.clear();
+		searchablesDone.set(0);
 		Arrays.asList(File.listRoots()).forEach(drive -> {
 			searchables.add(
 					new FileSearch(drive, filename, regexCheckbox.isSelected(), caseSensitiveCheckbox.isSelected()));
@@ -135,11 +140,14 @@ public class SearchController implements FileSearchListener, ApplicationListener
 
 	@Override
 	public void done() {
-		Platform.runLater(() -> {
-			cancelButton.setDisable(true);
-			searchButton.setDisable(false);
-			progressIndicator.setVisible(false);
-		});
+		// All searchables done
+		if (searchables.size() == searchablesDone.incrementAndGet()) {
+			Platform.runLater(() -> {
+				cancelButton.setDisable(true);
+				searchButton.setDisable(false);
+				progressIndicator.setVisible(false);
+			});
+		}
 	}
 
 	@Override
