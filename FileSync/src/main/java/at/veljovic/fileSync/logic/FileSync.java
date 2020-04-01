@@ -62,7 +62,6 @@ public class FileSync implements Runnable {
 				throw new StoppedException();
 			} else if (isFileChanged(srcFile, destFile)) {
 				filesToCopy.put(srcFile, destFile);
-
 			}
 		});
 		return filesToCopy;
@@ -98,6 +97,11 @@ public class FileSync implements Runnable {
 		void done();
 	}
 
+	/**
+	 * 
+	 * @author av
+	 *
+	 */
 	private class StoppedException extends RuntimeException {
 		private static final long serialVersionUID = 1L;
 

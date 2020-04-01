@@ -46,6 +46,6 @@
 				</ContextMenu>
 			</contextMenu>
 		</ListView>
-		<Label text="File search possibilities" GridPane.columnSpan="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
+		<Label text="File search possibilities" GridPane.columnSpan="2" />
 	</children>
 </GridPane>
